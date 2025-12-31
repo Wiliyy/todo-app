@@ -1,0 +1,72 @@
+.todo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+
+}
+
+.todo-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    gap: 10px;
+}
+
+
+
+.todo-item-button {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.todo-item-checkbox-button {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid var(--button-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.todo-item-checkbox-button-checked {
+    width: 20px;
+    height: 20px;
+    background-color: var(--button-color-checked);
+    border: 1px solid var(--button-color-checked);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.todo-item-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+} 

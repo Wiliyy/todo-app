@@ -3,22 +3,24 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /* background-color: #f0f0f0; */
     gap: 10px;
+    width: 100%;
 }
 
-input {
+.todo-form-input {
     width: 80%;
     padding: 10px;
     border-radius: 20px;
     border: none;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
 }
 
-button {
+.todo-form-button {
     width: 35px;
     height: 35px;
-    background-color: #e63030;
-    color: rgb(0, 0, 0);
+    background-color: var(--button-color);
+    color: var(--primary-color);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -30,11 +32,11 @@ button {
     font-weight: 900;
 }
 
-button:hover {
-    background-color: #388e3c;
+.todo-form-button:hover {
+    background-color: var(--button-color-hover);
 }
 
-h1 {
+.todo-form-title {
     font-size: 3.2em;
     line-height: 1.1;
   }

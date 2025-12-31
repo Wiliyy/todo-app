@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/TodoForm.css'
 
 function TodoForm() {
-const [todo, setTodo] = useState([])
+    
 const [input, setInput] = useState('')
 
 const handleChange = (e) => {
@@ -11,16 +11,14 @@ const handleChange = (e) => {
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    setTodo(input)
 }
 
   return (
     <div>
-        <h1>Todo Form</h1>
-        <p>{...todo}</p>
+        <h1 className="todo-form-title">Todo Form</h1>
         <div className="todo-form">
-            <input placeholder='write your next task' type="text" value={input} onChange={handleChange} />
-            <button onClick={handleSubmit}> + </button>
+            <input className="todo-form-input" placeholder='write your next task' type="text" value={input} onChange={handleChange} />
+            <button className="todo-form-button" onClick={handleSubmit}> + </button>
         </div>
     </div>
   )
