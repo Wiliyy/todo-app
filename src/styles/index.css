@@ -4,6 +4,7 @@
   --text-color: #ffffff;
   --button-color: #e63030;
   --button-color-checked: #008000;
+  --button-color-hover: #b52525;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: rgba(255, 255, 255, 0.87);
   background-color: var(--primary-color);

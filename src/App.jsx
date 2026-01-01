@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './styles/App.css'
 import TodoForm from './components/TodoForm'
 import TodoItem from './components/TodoItem'
@@ -17,11 +15,18 @@ function App() {
     setTodos(todos.map((todo) => todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo))
   }
 
+  const handleAddTodo = (text) => {
+    setTodos([...todos, { id: todos.length + 1, text: text, isCompleted: false }])
+  }
+
+  const handleDeleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
   return (
     <>
-      <TodoForm />
+      <TodoForm onAddTodo={handleAddTodo} />
       {todos.length > 0 && todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} />
+        <TodoItem onDeleteTodo={handleDeleteTodo} key={todo.id} todo={todo} onToggle={handleToggle} />
       ))}
       {todos.length === 0 && <p>No todos to show</p>}
     </>
