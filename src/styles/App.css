@@ -6,3 +6,16 @@
   width: 50%;  
 }
 
+
+  .app{
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .todos-container{
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+  }

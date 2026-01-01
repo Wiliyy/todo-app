@@ -2,10 +2,13 @@
   --primary-color: #000000;
   --secondary-color: #1c1d1c93;
   --text-color: #ffffff;
+  --text-color-secondary: #949a9493;
+  --text-color-secondary-hover: #353735;
   --button-color: #e63030;
   --button-color-checked: #008000;
   --button-color-hover: #b52525;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  text-transform: capitalize;
   color: rgba(255, 255, 255, 0.87);
   background-color: var(--primary-color);
 
@@ -19,4 +22,6 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+
 }
+

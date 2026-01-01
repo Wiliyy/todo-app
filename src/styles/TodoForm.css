@@ -4,12 +4,15 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    width: 100%;
+    max-width: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .todo-form-input {
     width: 80%;
-    padding: 10px;
+    padding: 20px;
     border-radius: 20px;
     border: none;
     background-color: var(--secondary-color);

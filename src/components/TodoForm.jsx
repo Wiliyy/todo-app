@@ -20,10 +20,9 @@ const handleSubmit = (e) => {
         <h1 className="todo-form-title">Todo Form</h1>
         <div className="todo-form">
             <input className="todo-form-input" placeholder='write your next task' type="text" value={input} onChange={handleChange} />
-            <button className="todo-form-button" onClick={handleSubmit}> + </button>
+            <button className="todo-form-button" type="submit"> + </button>
         </div>
     </form>
-    
   )
 }
 
