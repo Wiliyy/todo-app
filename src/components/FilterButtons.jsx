@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/FilterButtons.css'
 
-function FilterButtons({ todos, currentFilter, onFilterChange }) {
+function FilterButtons({ completedTodos , todos, currentFilter, onFilterChange }) {
     // Tip: Using an array makes it easy to add/remove filters
     const filters = [
         { id: 'all', label: 'All' },
@@ -38,7 +38,11 @@ function FilterButtons({ todos, currentFilter, onFilterChange }) {
                     >
                         {filter.label} 
                         
-                            {handleTaskCount(filter) > 0 && 
+                            {
+                            (
+                                completedTodos == todos.length ||
+                            handleTaskCount(filter) > 0
+                        ) && (filter.id == currentFilter) &&
                         <span className='filter-buttons-button-count'>
                             {handleTaskCount(filter)}
                             </span>

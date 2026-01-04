@@ -20,12 +20,39 @@ function App() {
     setCompletedTodos(todos.filter(todo => todo.isCompleted).length)
   }, [todos])
 
+  const [input, setInput] = useState('')
+  const [isFormVisible, setIsFormVisible] = useState(false)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setInput('')
+    if (input.trim() === '') {
+      // return
+    }else{  
+      addTodo(input)
+    }
+  }
 
-  
+  const handleFormVisible = (visible) => {
+   console.log("visible")
+   if (visible == 1) {
+    setIsFormVisible(true)
+   }
+   else {
+    setIsFormVisible(false)
+   }
+  }
+
+  const handleAppClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleFormVisible(false)
+    }
+  }
+
   return (
-    <div className='app'>
-      <TodoForm  todos={todos} completedTodos={completedTodos} onAddTodo={addTodo} />
-      <FilterButtons todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} />
+    <div onClick={handleAppClick} className='app'>
+
+      <TodoForm setIsFormVisible={setIsFormVisible} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit} todos={todos} completedTodos={completedTodos} />
+      <FilterButtons completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} />
       <TodoList
         todos={filteredTodos}
         onToggle={toggleTodo}
@@ -34,6 +61,7 @@ function App() {
         editingId={editingId}
         setEditingId={setEditingId}
       />
+      { !isFormVisible && <button className="floating-button" onClick={() => { handleFormVisible(1); }}> + </button> }
     </div>
   )
 }

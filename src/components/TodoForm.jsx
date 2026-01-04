@@ -1,29 +1,23 @@
 import React, { useState } from 'react'
 import '../styles/TodoForm.css'
 
-function TodoForm({ todos, completedTodos, onAddTodo }) {
+function TodoForm({setIsFormVisible , isFormVisible, input, setInput, handleSubmit, todos, completedTodos }) {
 
-const [input, setInput] = useState('')
 
 const handleChange = (e) => {
     setInput(e.target.value)
 }
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-    onAddTodo(input)
-    setInput('')
-}
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='todo-form-container' onSubmit={handleSubmit}>
       <div className="todo-form-hero"
         >
           <div>
             <h1>
               {completedTodos != todos.length ? 'you can do it' : 'you did it'}
               </h1>
-            <p>{completedTodos != todos.length ? 'keep it up' : 'good job'}</p>
+            <p>{completedTodos != todos.length ? 'keep it up' : 'good job !'}</p>
           </div>
           <div>
             
@@ -40,10 +34,19 @@ const handleSubmit = (e) => {
           </div>
           
         </div>
-        <div className="todo-form">
-            <input className="todo-form-input" placeholder='write your next task' type="text" value={input} onChange={handleChange} />
-            <button className="todo-form-button" type="submit"> + </button>
-        </div>
+      { isFormVisible && <div className="todo-form" onClick={(e) => e.stopPropagation()}>
+            <input
+              className="todo-form-input"
+              placeholder='write your next task'
+              type="text"
+              value={input}
+              onChange={handleChange}
+              onBlur={() => setIsFormVisible(false)}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button className="todo-form-button" onClick={(e) => { e.stopPropagation(); handleSubmit(e); }}> + </button>
+        </div>}
+        
     </form>
   )
 }

@@ -56,8 +56,18 @@
     align-items: center;
     justify-content: center;
     color: var(--text-color);
+    position: relative;
 }
 
+.todo-item-checkbox-button-checked-icon {
+    position: absolute;
+    top: .2cap;
+    left: .3cap;
+    width: 2cap;
+    height: 2cap;
+    color: var(--text-color);
+    z-index: 10;
+}
 .todo-item-text {
     font-size: 1.2em;
     font-weight: 600;

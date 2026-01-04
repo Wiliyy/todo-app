@@ -2,14 +2,14 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  padding:2cap 10cap;
+  /* padding:2cap 10cap; */
 }
 
 
   .app{
     width: 100%;
     height: 100%;
-    gap: 5cap;
+    gap: var(--global-gap);
     display: flex;
     flex-direction: column;
   }
@@ -17,7 +17,27 @@
 
   .todos-container{
 
-    gap: 1cap;
+    gap: 2cap;
     display: flex;
     flex-direction: column;
+  }
+
+
+  .floating-button {
+    position: absolute;
+    bottom: 1cap;
+    right: 1cap;
+    width: 3cap;
+    height: 3cap;
+    background-color: var(--button-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2.5cap;
+    font-weight: 900;
+  }
+
+  .floating-button:hover {
+    background-color: var(--button-color-hover);
   }

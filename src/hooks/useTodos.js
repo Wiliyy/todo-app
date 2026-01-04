@@ -4,22 +4,28 @@ import { TodoService } from '../services/TodoService.js'
 import { Todo } from '../models/Todo.js'
 
 export function useTodos(initialTodos = []) {
-    const [service] = useState(() => {
-        const todoService = new TodoService()
-        // Initialize with existing todos
-        initialTodos.forEach(todo => {
-            todoService.addTodo(todo.text)
-        })
-        return todoService
-    })
 
     const [todos, setTodos] = useState(() =>
         initialTodos.map(t => Todo.fromPlainObject(t))
     )
 
+    const [service] = useState(() => {
+
+        const todoService = new TodoService()
+
+        initialTodos.forEach(todo => {
+            todoService.addTodo(todo.text)
+        })
+
+        return todoService
+    })
+
+
     const addTodo = useCallback((text) => {
+
         const newTodo = service.addTodo(text)
         setTodos(prev => [...prev, newTodo])
+
     }, [service])
 
     const deleteTodo = useCallback((id) => {
@@ -28,14 +34,15 @@ export function useTodos(initialTodos = []) {
     }, [service])
 
     const toggleTodo = useCallback((id) => {
-        // Fix: Get the updated todo from service and use it
+
         const updatedTodo = service.toggleTodo(id)
+
         if (updatedTodo) {
-          setTodos(prev => prev.map(t => 
-            t.id === id ? updatedTodo : t
-          ))
+            setTodos(prev => prev.map(t =>
+                t.id === id ? updatedTodo : t
+            ))
         }
-      }, [service])
+    }, [service])
 
     const updateTodo = useCallback((id, newText) => {
         service.updateTodo(id, newText)
