@@ -1,21 +1,23 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  width: 50%;  
+  padding:2cap 10cap;
 }
 
 
   .app{
-    gap: 20px;
+    width: 100%;
+    height: 100%;
+    gap: 5cap;
     display: flex;
     flex-direction: column;
   }
 
 
   .todos-container{
-    gap: 5px;
+
+    gap: 1cap;
     display: flex;
     flex-direction: column;
   }

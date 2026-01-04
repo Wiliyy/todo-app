@@ -1,17 +1,20 @@
 :root {
-  --primary-color: #000000;
-  --secondary-color: #1c1d1c93;
+  --primary-color: #190035;
+  /* --secondary-color: #1c1d1c93; */
+  --secondary-color: rgba(4, 2, 50, 0.9);
   --text-color: #ffffff;
   --text-color-secondary: #949a9493;
   --text-color-secondary-hover: #353735;
-  --button-color: #e63030;
-  --button-color-checked: #008000;
-  --button-color-hover: #b52525;
+  --button-color: #bab8b8;
+  --button-color-checked: #959595;
+  --button-color-hover: #8a8a8a;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   text-transform: capitalize;
   color: rgba(255, 255, 255, 0.87);
   background-color: var(--primary-color);
 
+
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,9 +22,9 @@
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  /* margin: 0; */
+  /* display: flex; */
+  /* place-items: center; */
 
 }
 

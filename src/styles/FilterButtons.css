@@ -5,7 +5,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    gap: 10px;
+    gap: 1cap;
 }
 
 .filter-buttons-title{
@@ -24,37 +24,64 @@
     flex-direction: row;
     width: 100%;
     height: 100%;
-    gap: 10px;
-    padding-left: 20px;
+    gap: 1cap;
+    padding-left: 2cap;
 }
 
 .filter-buttons-button{
     background-color: var(--secondary-color);
     color: var(--text-color);
     border: none;
-    width: 70px;
-    height: 70px;
+    height: 7cap;
     border-radius: 50%;
+
     
-    width: 100px;
-    height: 80px;
-    border-radius: 10%;
+    position: relative;
+    height: 8cap;
+    height: 5cap;
+    border-radius: 20%;
+    border-radius: 5%;
+    border-radius: 8%;
+    /* text-align: left; */
+    min-width: 10cap;
 }
 .filter-buttons-button-active{
-    background-color: var(--text-color-secondary);
-    color: var(--text-color);
+    background-color: var(--button-color);
+    color: var(--secondary-color);
     border: none;
-    width: 70px;
-    height: 70px;
+    height: 7cap;
     border-radius: 50%;
-    
-    width: 100px;
-    height: 80px;
-    border-radius: 10%;
+    min-width: 10cap;
+    height: 5cap;
+    border-radius: 8%;
+    position: relative;
+    /* text-align: left; */
 }
 
 
 
 .filter-buttons-button:hover{
-    background-color: var(--text-color-secondary-hover);
+    background-color: var(--button-color);
+    color: var(--secondary-color);
+}
+
+
+.filter-buttons-button-count{
+    position: absolute;
+    top: -.5cap;
+    right: -.5cap;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    background-color: var(--button-color-checked);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    padding: 0.5cap;
+    width: .9cap;
+    height: .9cap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

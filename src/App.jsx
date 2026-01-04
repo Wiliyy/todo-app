@@ -1,56 +1,39 @@
-import { useState } from 'react'
+// src/App.jsx
+import { useEffect, useState } from 'react'
 import './styles/App.css'
 import TodoForm from './components/TodoForm'
-import TodoItem from './components/TodoItem'
 import FilterButtons from './components/FilterButtons'
+import TodoList from './components/TodoList'
+import { useTodos } from './hooks/useTodos'
+import { useTodoFilter } from './hooks/useTodoFilter'
+
 
 function App() {
+  const initialTodos = []
 
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Buy groceries', isCompleted: false },
-    { id: 2, text: 'Finish project', isCompleted: false },
-    { id: 3, text: 'Call mom', isCompleted: false },
-  ])
+  const { todos, addTodo, deleteTodo, toggleTodo, updateTodo } = useTodos(initialTodos)
+  const { filteredTodos, currentFilter, changeFilter } = useTodoFilter(todos)
+  const [editingId, setEditingId] = useState(null)
+  const [completedTodos, setCompletedTodos] = useState(0)
 
-  const [currentFilter, setCurrentFilter] = useState('all')
-
-  // Tip: Cleaner filter logic using object lookup
-  const filterMap = {
-    all: () => true,
-    active: (todo) => !todo.isCompleted,
-    completed: (todo) => todo.isCompleted
-  }
-
-  const filteredTodos = todos.filter(filterMap[currentFilter] || filterMap['all'])
-
-  const onFilterChange = (filter) => {
-    setCurrentFilter(filter)
-  }
-
-  const handleToggle = (id) => {
-    setTodos(todos.map((todo) => todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo))
-  }
-
-  const handleAddTodo = (text) => {
-    setTodos([...todos, { id: todos.length + 1, text: text, isCompleted: false }])
-  }
-
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id))
-  }
+  useEffect(() => {
+    setCompletedTodos(todos.filter(todo => todo.isCompleted).length)
+  }, [todos])
 
 
+  
   return (
     <div className='app'>
-      <TodoForm onAddTodo={handleAddTodo} />
-      <FilterButtons  currentFilter={currentFilter} onFilterChange={onFilterChange} />
-      <div className='todos-container'>
-        <h1 className='filter-buttons-title'> TODAYS TASKS </h1>
-        {filteredTodos.length > 0 && filteredTodos.map((todo) => (
-          <TodoItem onDeleteTodo={handleDeleteTodo} key={todo.id} todo={todo} onToggle={handleToggle} />
-        ))}
-        {filteredTodos.length === 0 && <p>No {currentFilter} tasks to show</p>}
-      </div>
+      <TodoForm  todos={todos} completedTodos={completedTodos} onAddTodo={addTodo} />
+      <FilterButtons todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} />
+      <TodoList
+        todos={filteredTodos}
+        onToggle={toggleTodo}
+        onDelete={deleteTodo}
+        onUpdate={updateTodo}
+        editingId={editingId}
+        setEditingId={setEditingId}
+      />
     </div>
   )
 }

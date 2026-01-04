@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/FilterButtons.css'
 
-function FilterButtons({ currentFilter, onFilterChange }) {
+function FilterButtons({ todos, currentFilter, onFilterChange }) {
     // Tip: Using an array makes it easy to add/remove filters
     const filters = [
         { id: 'all', label: 'All' },
@@ -12,6 +12,18 @@ function FilterButtons({ currentFilter, onFilterChange }) {
     const handleFilterClass = (filter) => {
         return `filter-buttons-button ${currentFilter === filter ? 'filter-buttons-button-active' : ''}`
     }
+
+    const handleTaskCount = (filter) => {
+        switch (filter.id) {
+            case 'completed':
+                return ` ${todos.filter(todo => todo.isCompleted).length}`
+            case 'active':
+                return ` ${todos.filter(todo => !todo.isCompleted).length}`
+            case 'all':
+                return ` ${todos.length}`
+        }
+    }
+
 
     return (
         <div className='filter-buttons-container'>
@@ -24,7 +36,14 @@ function FilterButtons({ currentFilter, onFilterChange }) {
                         className={handleFilterClass(filter.id)}
                         onClick={() => onFilterChange(filter.id)}
                     >
-                        {filter.label}
+                        {filter.label} 
+                        
+                            {handleTaskCount(filter) > 0 && 
+                        <span className='filter-buttons-button-count'>
+                            {handleTaskCount(filter)}
+                            </span>
+                             } 
+
                     </button>
                 ))}
             </div>

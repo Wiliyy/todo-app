@@ -3,25 +3,42 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 1cap;
     max-width: 100%;
     background-color: var(--secondary-color);
-    border-radius: 20px;
-    padding: 20px;
+    border-radius: 2cap;
+    padding: 2cap;
+    margin-top: 2cap;
 }
 
 .todo-form-input {
     width: 80%;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 2cap;
+    /* border-radius: 20px; */
     border: none;
     background-color: var(--secondary-color);
     color: var(--text-color);
+    /* backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    box-shadow: 0 0 5px 0 rgba(127, 127, 127, 0.4); */
+    border-bottom: 1px solid var(--button-color);
+    /* margin-bottom: 10px; */
+    width: 100%;
+    text-align: left;
+    color: var(--text-color-secondary);
+    font-weight: 600;
+    font-size: .9em;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    margin: 0;
+    padding: 0;
+    padding-bottom: 1cap;
 }
 
 .todo-form-button {
-    width: 35px;
-    height: 35px;
+    width: 3cap;
+    height: 3cap;
     background-color: var(--button-color);
     color: var(--primary-color);
     border: none;
@@ -31,7 +48,7 @@
     align-items: center;
     justify-content: center;
     transition: background 0.2s;
-    font-size: 1.3em;
+    font-size: 1.3cap;
     font-weight: 900;
 }
 
@@ -40,7 +57,58 @@
 }
 
 .todo-form-title {
-    font-size: 3.2em;
+    font-size: 3.2cap;
     line-height: 1.1;
+    /* border-bottom: 1px solid var(--button-color);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    color: var(--text-color-secondary);
+    font-weight: 600;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    margin: 0;
+    padding: 0; */
   }
+
+
+  .todo-form-hero{
+    border: 1px solid var(--button-color);
+    border-radius: 2cap;
+    padding: 2cap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1cap;
+  }
+
+  .todo-form-hero-progress{
+    width: 10cap;
+    height: 10cap;
+    background-color: var(--button-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1.8cap;
+    font-weight: 600;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+
+
+  .todo-form-hero p{
+    font-size: 1.8cap;
+  }
+
+  .todo-form-hero h1{
+    font-size: 3.2cap;
+    font-weight: 600;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+
+
   

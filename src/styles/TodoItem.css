@@ -35,8 +35,7 @@
 }
 
 .todo-item-checkbox-button {
-    width: 20px;
-    height: 20px;
+    padding: 10px;
     background-color: transparent;
     border: 1px solid var(--button-color);
     border-radius: 50%;
@@ -48,8 +47,7 @@
 }
 
 .todo-item-checkbox-button-checked {
-    width: 20px;
-    height: 20px;
+    padding: 10px;
     background-color: var(--button-color-checked);
     border: 1px solid var(--button-color-checked);
     border-radius: 50%;
@@ -69,3 +67,8 @@
     text-align: left;
     width: 100%;
 } 
+
+
+.todo-item-button{
+    color: var(--text-color-secondary);
+}
