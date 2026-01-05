@@ -5,16 +5,13 @@
     justify-content: center;
     width: 100%;
     gap: 3cap;
-    z-index: -999;
+    /* z-index: -999; */
 }
 
-.filter-buttons-container * {
-    z-index: -999;
-}
-
-/* .filter-buttons{
+/* .filter-buttons-container * {
     z-index: -999;
 } */
+
 .filter-buttons-title{
     font-size: 1em;
     font-weight: 600;

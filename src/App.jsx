@@ -55,7 +55,6 @@ function App() {
 
   return (
     <div onClick={handleAppClick} className='app'>
-
       <TodoForm handleAppClick={handleAppClick} setIsFormVisible={setIsFormVisible} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit} todos={todos} completedTodos={completedTodos} />
       <FilterButtons completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} />
       <TodoList

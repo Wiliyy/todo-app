@@ -36,10 +36,10 @@ function TodoItem({ todo, onToggle, onDelete, onEdit, isEditing, onSaveEdit, onC
 
     return (
         <div className="todo-item">
-            <div onClick={() => onToggle(todo.id, todo.text, todo.isCompleted)} className="todo-item-container">
+            <div 
+            onClick={() => onToggle(todo.id, todo.text, todo.isCompleted)} className="todo-item-container">
                 <button
                     className={`${todo.isCompleted ? 'todo-item-checkbox-button-checked' : 'todo-item-checkbox-button'}`}
-                    onClick={() => onToggle(todo.id, todo.text, todo.isCompleted)}
                 >
                 {todo.isCompleted &&
                    <div className="todo-item-checkbox-button-checked-icon">

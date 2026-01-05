@@ -6,7 +6,7 @@
 
 
 .todo-form-hero {
-  border: 1px solid var(--button-color);
+  border: .1px solid var(--button-color);
   border-radius: var(--global-border-radius);
   padding: 2cap;
   display: flex;
@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-around;
   gap: 1cap;
-  z-index: -999;
+  /* z-index: -999; */
 }
 
 
@@ -41,7 +41,7 @@
     text-align: left;
     color: var(--text-color-secondary);
     font-weight: 600;
-    font-size: .9em;
+    font-size: 16px;
     font-weight: 600;
     color: var(--text-color-secondary);
     margin: 0;
