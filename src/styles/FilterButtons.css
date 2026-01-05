@@ -47,7 +47,7 @@
 }
 .filter-buttons-button-active{
     background-color: var(--button-color);
-    color: var(--secondary-color);
+    /* color: var(--secondary-color); */
     border: none;
     height: 7cap;
     border-radius: 50%;
