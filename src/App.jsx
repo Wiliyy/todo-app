@@ -24,34 +24,39 @@ function App() {
   const [isFormVisible, setIsFormVisible] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault()
-    setInput('')
     if (input.trim() === '') {
-      // return
-    }else{  
-      addTodo(input)
+      return
     }
+    addTodo(input)
+    setInput('')
+    setIsFormVisible(false)
   }
 
   const handleFormVisible = (visible) => {
-   console.log("visible")
-   if (visible == 1) {
-    setIsFormVisible(true)
-   }
-   else {
-    setIsFormVisible(false)
-   }
+    console.log("handleFormVisible", visible)
+    if (visible === 1) {
+      console.log("visible true")
+      setIsFormVisible(true)
+    } else {
+      console.log("visible false")
+      setIsFormVisible(false)
+    }
   }
-
+  
   const handleAppClick = (e) => {
+    console.log("handleAppClick")
     if (e.target === e.currentTarget) {
       handleFormVisible(false)
+      console.log("handleAppClick true")
+    } else {
+      console.log("handleAppClick false")
     }
   }
 
   return (
     <div onClick={handleAppClick} className='app'>
 
-      <TodoForm setIsFormVisible={setIsFormVisible} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit} todos={todos} completedTodos={completedTodos} />
+      <TodoForm handleAppClick={handleAppClick} setIsFormVisible={setIsFormVisible} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit} todos={todos} completedTodos={completedTodos} />
       <FilterButtons completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} />
       <TodoList
         todos={filteredTodos}

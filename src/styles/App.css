@@ -1,18 +1,31 @@
-#root {
+/* #root {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  /* padding:2cap 10cap; */
+  padding:2cap 10cap;
+} */
+
+html , body , #root {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  overflow-x: hidden;
+  text-transform: capitalize;
+  font-family: 'Formula Condensed', sans-serif;
 }
 
-
-  .app{
-    width: 100%;
+.app{
+    /* width: 100%; */
+    padding: 2rem;
     height: 100%;
     gap: var(--global-gap);
     display: flex;
     flex-direction: column;
+    /* z-index: 9999; */
+    margin-bottom: 10cap;
   }
+
 
 
   .todos-container{
@@ -22,6 +35,9 @@
     flex-direction: column;
   }
 
+  .todos-container * {
+    z-index: -999;
+  }
 
   .floating-button {
     position: absolute;
@@ -36,6 +52,7 @@
     cursor: pointer;
     font-size: 2.5cap;
     font-weight: 900;
+    z-index: 999;
   }
 
   .floating-button:hover {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/TodoForm.css'
 
-function TodoForm({setIsFormVisible , isFormVisible, input, setInput, handleSubmit, todos, completedTodos }) {
+function TodoForm({handleAppClick, setIsFormVisible , isFormVisible, input, setInput, handleSubmit, todos, completedTodos }) {
 
 
 const handleChange = (e) => {
@@ -10,9 +10,8 @@ const handleChange = (e) => {
 
 
   return (
-    <form className='todo-form-container' onSubmit={handleSubmit}>
-      <div className="todo-form-hero"
-        >
+    <form  className='todo-form-container' onSubmit={handleSubmit} onClick={(e) => {e.stopPropagation() , handleAppClick(e)}}>
+      <div className="todo-form-hero">
           <div>
             <h1>
               {completedTodos != todos.length ? 'you can do it' : 'you did it'}
@@ -20,7 +19,6 @@ const handleChange = (e) => {
             <p>{completedTodos != todos.length ? 'keep it up' : 'good job !'}</p>
           </div>
           <div>
-            
             <div className="todo-form-hero-progress">
             {  
               (completedTodos != todos.length) 
@@ -32,21 +30,22 @@ const handleChange = (e) => {
               }
             </div>
           </div>
-          
         </div>
-      { isFormVisible && <div className="todo-form" onClick={(e) => e.stopPropagation()}>
-            <input
-              className="todo-form-input"
-              placeholder='write your next task'
-              type="text"
-              value={input}
-              onChange={handleChange}
-              onBlur={() => setIsFormVisible(false)}
-              onClick={(e) => e.stopPropagation()}
-            />
-            <button className="todo-form-button" onClick={(e) => { e.stopPropagation(); handleSubmit(e); }}> + </button>
-        </div>}
-        
+      { isFormVisible && <div className='todo-form-container-inner' onClick={handleAppClick}>
+          <div className="todo-form">
+                <input
+                  className="todo-form-input"
+                  placeholder='write your next task'
+                  type="text"
+                  value={input}
+                  onChange={handleChange}
+                  onClick={(e) => {e.stopPropagation() , console.log("input clicked")}}
+                  autoFocus
+                  />
+                <button className="todo-form-button" onClick={(e) => { e.stopPropagation(); handleSubmit(e); }}> + </button>
+            </div>
+        </div>
+        }
     </form>
   )
 }
