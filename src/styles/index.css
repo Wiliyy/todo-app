@@ -1,19 +1,18 @@
 :root {
-  --primary-color: #190035;
-  /* --secondary-color: #1c1d1c93; */
-  --secondary-color: rgba(4, 2, 50, 0.9);
-  --text-color: #ffffff;
-  --text-color-secondary: #949a9493;
-  --text-color-secondary-hover: #353735;
-  --button-color: #bab8b8;
-  --button-color-checked: #959595;
-  --button-color-hover: #8a8a8a;
+  background-color: rgb(14, 14, 51);  
+  --primary-color: rgba(13, 14, 23, 0.866);  
+  --secondary-color: rgba(136, 121, 168, 0.95);  
+  --text-color: #2c2c2c;  
+  --text-color-secondary: #00a971;  
+  --text-color-secondary-hover: #008f79;  
+  --button-color: #319282; 
+  --button-color-checked: #239553;  
+  --button-color-hover: #075a6b; 
   --global-gap: 4cap;
   --global-border-radius: 1cap;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   text-transform: capitalize;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: var(--primary-color);  
+  color: var(--text-color-secondary);  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
