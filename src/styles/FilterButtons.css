@@ -5,6 +5,7 @@
     justify-content: center;
     width: 100%;
     gap: 3cap;
+    height: 8cap;
     /* z-index: -999; */
 }
 
@@ -23,6 +24,57 @@
     color: var(--text-color-secondary);
 }
 
+.filter-buttons-title-button{
+    background-color: transparent;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    color: var(--text-color-secondary);
+    border: none;
+    cursor: pointer;
+}
+
+.filter-buttons-button-label-container{
+    /* background-color:var(--secondary-color); */
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-color);
+    /* margin: 0;
+    padding: 0; */
+    /* text-align: left; */
+    width: 3.5cap;
+    /* height: 100%; */
+    color: var(--text-color-secondary);
+    border: none;
+    cursor: pointer;
+    position: relative;
+}   
+
+.filter-buttons-button-label-count{
+    position: absolute;
+    top: -.5cap;
+    /* left: -.10cap; */
+    font-size: .8em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    background-color: var(--button-color-checked);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    padding: 0.5cap;
+    width: .5cap;
+    height: .5cap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
 .filter-buttons{
     display: flex;
     flex-direction: row;
@@ -33,42 +85,62 @@
 }
 
 .filter-buttons-button{
+    text-align: center;
     background-color: var(--secondary-color);
     color: var(--text-color);
-    border: none;
-    height: 7cap;
-    border-radius: 50%;
-
-    
+    border: none;    
     position: relative;
-    height: 8cap;
-    height: 5cap;
-    border-radius: 20%;
-    border-radius: 5%;
-    border-radius: 8%;
-    /* text-align: left; */
-    min-width: 10cap;
+    border-radius: 30%;
+    gap: 8px;
+    border-radius: 9999px;   /* pill shape */
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    /* outline: none; */
+    padding: .6cap .6cap;
+    width: 10%;
+    min-width: 10%;
+    max-width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .filter-buttons-button-active{
     background-color: var(--button-color);
     color: var(--secondary-color);
     border: none;
-    height: 7cap;
-    border-radius: 50%;
-    min-width: 10cap;
-    height: 5cap;
-    border-radius: 8%;
     position: relative;
-    /* text-align: left; */
+    border-radius: 9999px;  
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    /* outline: none; */
+    width: 6cap;
+    min-width: 7cap;
+    max-width: 10cap;
+
 }
 
-
+.filter-buttons-button-label {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .filter-buttons-button:hover{
     background-color: var(--button-color);
     color: var(--secondary-color);
 }
 
+/* .filter-buttons-button:focus,
+.filter-buttons-button-active:focus {
+    outline: none;
+} */
 
 .filter-buttons-button-count{
     position: absolute;
@@ -88,4 +160,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 9999;
+}
+
+
+
+
+.todo-item-tag-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1cap;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border-radius: 9999px;
+    font-size: 11px;
+    padding: 0 0.5cap;
+    /* width: 10%; */
+    /* min-width: 10%; */
+    /* max-width: 10%; */
 }

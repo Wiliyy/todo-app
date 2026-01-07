@@ -2,21 +2,28 @@
 import { useState, useMemo, useCallback } from 'react'
 import { TodoFilterService } from '../services/TodoFilterService.js'
 
-export function useTodoFilter(todos) {
-  const [currentFilter, setCurrentFilter] = useState('all')
-  const [filterService] = useState(() => new TodoFilterService())
+export function useTodoFilter(todos, error, setError) {
+    const [currentFilter, setCurrentFilter] = useState('all')
+    const [filterService] = useState(() => new TodoFilterService())
 
-  const filteredTodos = useMemo(() => {
-    return filterService.filter(todos, currentFilter)
-  }, [todos, currentFilter, filterService])
+    const filteredTodos = useMemo(() => {
+        return filterService.filter(todos, currentFilter)
+    }, [todos, currentFilter, filterService])
 
-  const changeFilter = useCallback((filter) => {
-    setCurrentFilter(filter)
-  }, [])
+    const changeFilter = useCallback((filter) => {
+        console.log("changeFilter", filter)
+        setError("")
+        setCurrentFilter(filter)
+    }, [])
 
-  return {
-    filteredTodos,
-    currentFilter,
-    changeFilter
-  }
+    const getCount = useCallback((todos, filterType, selectedTag) => {
+        return filterService.getCount(todos, filterType, selectedTag)
+    }, [filterService])
+
+    return {
+        filteredTodos,
+        currentFilter,
+        changeFilter,
+        getCount
+    }
 }

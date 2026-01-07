@@ -2,7 +2,7 @@
 import '../styles/TodoItem.css'
 import { useState } from 'react'
 
-function TodoItem({ todo, onToggle, onDelete, onEdit, isEditing, onSaveEdit, onCancelEdit }) {
+function TodoItem({ selectedTag, todo, onToggle, onDelete, onEdit, isEditing, onSaveEdit, onCancelEdit }) {
     if (!todo) return null
 
     const [editText, setEditText] = useState(todo.text)
@@ -53,8 +53,11 @@ function TodoItem({ todo, onToggle, onDelete, onEdit, isEditing, onSaveEdit, onC
                     style={{ textDecoration: todo.isCompleted ? 'line-through' : 'none' }}
                     className="todo-item-text"
                 >
-                    {todo.text}
+                    {todo.text} 
                 </p>
+                {!selectedTag && <div className="todo-item-tag-container">
+                    <p className="todo-item-tag">{todo.tag}</p>
+                </div>}
                 <button className="todo-item-button" onClick={() => onEdit(todo.id)}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>

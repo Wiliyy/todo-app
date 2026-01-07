@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/FilterButtons.css'
 
-function FilterButtons({ filters, setFilters, error, setError, isFormVisible, input, setInput, handleTaskCount , currentFilter, onFilterChange }) {
+function TagsButtons({ selectedTag, tags, setTags, error, setError, isFormVisible, input, setInput, handleTaskCount , currentTag, onTagChange }) {
 
-    const handleFilterClass = (filter) => {
-        return `filter-buttons-button ${filter.selected === filter ? 'filter-buttons-button-active' : ''}`
+    const handleFilterClass = (item) => {
+        return `filter-buttons-button ${item.selected ? 'filter-buttons-button-active' : ''}`
     }
 
     
@@ -14,43 +14,44 @@ function FilterButtons({ filters, setFilters, error, setError, isFormVisible, in
         if (input.trim() === '') {
             return
         }
-        if (filters.some(filter => filter.id === input)) {
+        if (tags.some(tag => tag.id === input)) {
             setError("Input is empty or already exists")
             return
         }
-        setFilters([
-            ...filters.map(filter => ({ ...filter, selected: false })),
+        setTags([
+            ...tags.map(tag => ({ ...tag, selected: false })),
             { id: input, label: input, selected: true }
         ])
         setInput('')
     }
 
+    
     return (
         <form
             style={{ zIndex: isFormVisible ? -1 : 1 }}
             onSubmit={handleSubmit} className='filter-buttons-container'>
-            <h1 className='filter-buttons-title'> CATEGORIES </h1>
+            <h1 className='filter-buttons-title'> CATEGORIES {selectedTag ? `(${selectedTag.label})` : ''}</h1>
             <div className='filter-buttons'>
                 {/* Tip: .map() is cleaner and follows DRY principle */}
-                {filters.map((filter, index) => (
+                {tags.map((tag, index) => (
                     <>
                         <button
-                            className={handleFilterClass(filter.id)}
-                            onClick={() => { onFilterChange(filter.id) }}>
+                            className={handleFilterClass(tag)}
+                            onClick={() => { onTagChange(tag.id) }}>
                             <span className='filter-buttons-button-label'>
-                                {filter.label}
+                                {tag.label}
 
                             </span>
                             {
-                                (filter.id == currentFilter) &&
+                                (tag.id == currentTag) &&
                                 <span className='filter-buttons-button-count'>
-                                    {handleTaskCount(filter)}
+                                    {handleTaskCount(tag)}
                                 </span>
                             }
                         </button>
-                        {(index === filters.length - 1) && !isFormVisible && (
+                        {(index === tags.length - 1) && !isFormVisible && (
                             <input
-                                className={handleFilterClass(filter.id === '' ? 'filter-buttons-button-active' : '')}
+                                className={handleFilterClass(tag.id === '' ? 'filter-buttons-button-active' : '')}
                                 placeholder='+'
                                 type='text'
                                 value={input}
@@ -67,4 +68,4 @@ function FilterButtons({ filters, setFilters, error, setError, isFormVisible, in
     )
 }
 
-export default FilterButtons
+export default TagsButtons

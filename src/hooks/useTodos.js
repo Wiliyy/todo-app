@@ -9,21 +9,22 @@ export function useTodos(initialTodos = []) {
         initialTodos.map(t => Todo.fromPlainObject(t))
     )
 
+
+    
     const [service] = useState(() => {
 
         const todoService = new TodoService()
 
         initialTodos.forEach(todo => {
-            todoService.addTodo(todo.text)
+            todoService.addTodo(todo.text, todo.tag || "Quick")
         })
 
         return todoService
     })
 
+    const addTodo = useCallback((text , tag) => {
 
-    const addTodo = useCallback((text) => {
-
-        const newTodo = service.addTodo(text)
+        const newTodo = service.addTodo(text, tag)
         setTodos(prev => [...prev, newTodo])
 
     }, [service])
@@ -51,11 +52,19 @@ export function useTodos(initialTodos = []) {
         ))
     }, [service])
 
+    const updateTag = useCallback((id, newTag) => {
+        service.updateTag(id, newTag)
+        setTodos(prev => prev.map(t =>
+            t.id === id ? Todo.fromPlainObject(t.toPlainObject()) : t
+        ))
+    }, [service])
+
     return {
         todos: todos.map(t => t.toPlainObject()),
         addTodo,
         deleteTodo,
         toggleTodo,
-        updateTodo
+        updateTodo,
+        updateTag
     }
 }

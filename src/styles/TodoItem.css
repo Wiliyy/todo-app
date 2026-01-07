@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     min-width: 100%;
-    gap: 10px;
+    gap: 1.5cap;
 }
 
 
@@ -33,6 +33,11 @@
     align-items: center;
     justify-content: center;
     color: var(--text-color);
+    outline: none;
+}
+
+.todo-item-button:focus {
+    outline: none;
 }
 
 .todo-item-checkbox-button {
@@ -45,7 +50,12 @@
     align-items: center;
     justify-content: center;
     color: var(--text-color);
+    /* outline: none; */
 }
+
+/* .todo-item-checkbox-button:focus {
+    outline: none;
+} */
 
 .todo-item-checkbox-button-checked {
     padding: 10px;
@@ -58,6 +68,11 @@
     justify-content: center;
     color: var(--text-color);
     position: relative;
+    /* outline: none; */
+}
+
+.todo-item-checkbox-button-checked:focus {
+    /* outline: none; */
 }
 
 .todo-item-checkbox-button-checked-icon {

@@ -20,11 +20,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Prevent text selection on UI elements */
+/* * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+} */
+
+/* Allow text selection only in inputs and contenteditable */
+*:not(input):not(textarea):not([contenteditable="true"]):not(p):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 body {
   margin: 0;
   padding: 0;
   /* display: flex; */
   /* place-items: center; */
 
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  user-select:text;
+  -webkit-user-select:text;
+  -moz-user-select:text;
+  -ms-user-select:text;
+  
 }
 

@@ -3,9 +3,9 @@
   padding: 2rem;
   text-align: center;
   padding:2cap 10cap;
-} */
-
-html , body , #root {
+  } */
+  
+  html , body , #root {
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -15,6 +15,10 @@ html , body , #root {
   font-family: 'Formula Condensed', sans-serif;
 }
 
+#root{
+  margin-bottom: 2cap;
+}
+
 .app{
     /* width: 100%; */
     padding: 2rem;
@@ -22,20 +26,18 @@ html , body , #root {
     gap: var(--global-gap);
     display: flex;
     flex-direction: column;
-    margin-bottom: 10cap;
+    /* outline: none; */
+    
   }
-
-
+  
+  /* .app:focus {
+    outline: none;
+  } */
 
   .todos-container{
-
     gap: 2cap;
     display: flex;
     flex-direction: column;
-  }
-
-  .todos-container * {
-    /* z-index: -999; */
   }
 
   .floating-button {
@@ -52,14 +54,16 @@ html , body , #root {
     font-size: 2.5cap;
     font-weight: 900;
     z-index: 999;
+    /* outline: none; */
   }
 
   .floating-button:hover {
     background-color: var(--button-color-hover);
   }
-
-
-
+  
+  /* .floating-button:focus {
+    outline: none;
+  } */
 
   input[type="color"],
 input[type="date"],
