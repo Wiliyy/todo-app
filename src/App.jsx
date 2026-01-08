@@ -17,7 +17,7 @@ function App() {
   const [error, setError] = useState('')
   const [completedTodos, setCompletedTodos] = useState(0)
 
-  const { todos, addTodo, deleteTodo, toggleTodo, updateTodo, updateTag } = useTodos(initialTodos)
+  const { todos, addTodo, deleteTodo, toggleTodo, updateTodo, updateTag , deleteTag } = useTodos(initialTodos)
   const { filteredTodos, currentFilter, changeFilter, getCount } = useTodoFilter(todos, error, setError)
   const [editingId, setEditingId] = useState(null)
   const [isFormVisible, setIsFormVisible] = useState(false)
@@ -31,8 +31,7 @@ function App() {
   ])
 
   const [filters, setFilters] = useState([
-    // { id: 'all', label: 'All', selected: true },
-    { id: 'active', label: 'Active', selected: false },
+    { id: 'active', label: 'Active', selected: true },
     { id: 'completed', label: 'Completed', selected: false }
   ])
 
@@ -92,7 +91,7 @@ function App() {
   const selectedTag = tags.find(tag => tag.selected)
 
   const handleTaskCount = (filter) => {
-    return getCount(todos, filter.id , selectedTag)
+    return getCount(todos, filter , selectedTag)
 }
 
 
@@ -101,12 +100,29 @@ function App() {
     <div onClick={handleAppClick} className='app'>
       <TodoHero completedTodos={completedTodos} totalTodos={todos.length} />
       {/* <FilterButtons handleTaskCount={handleTaskCount} filters={filters} setFilters={setFilters} error={error} setError={setError} updateTag={updateTag} isFormVisible={isFormVisible} input={input} setInput={setInput} getCount={getCount} completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} /> */}
-      <TagsButtons selectedTag={selectedTag} handleTaskCount={handleTaskCount} tags={tags} setTags={setTags} error={error} setError={setError} updateTag={updateTag} isFormVisible={isFormVisible} input={input} setInput={setInput} getCount={getCount} completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onTagChange={handleTagChange} />
+      <TagsButtons todos={todos} onDeleteTag={deleteTag} onUpdateTag={updateTag} selectedTag={selectedTag} handleTaskCount={handleTaskCount} tags={tags} setTags={setTags} error={error} setError={setError} updateTag={updateTag} isFormVisible={isFormVisible} input={input} setInput={setInput} getCount={getCount} completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onTagChange={handleTagChange} />
       <TodoForm error={error} setError={setError} handleAppClick={handleAppClick} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit}  />
-
     {
       filters.map((filter, index) => (
         (
+          <div 
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "2cap"
+          }}
+          key={index}
+          >
+      <button className='filter-buttons-title-button' onClick={() => handleTypeChange(filter.id)}>
+        {filter.label} TASKS{' '} 
+        
+                {handleTaskCount(filter.id)}
+        <span style={{ verticalAlign: 'middle' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            {!filter.selected ? <polyline points="9 6 15 12 9 18" /> : <polyline points="6 9 12 15 18 9" />}
+          </svg>
+        </span>
+      </button>
         <TodoList
           selectedTag={selectedTag}
           key={index}
@@ -123,12 +139,14 @@ function App() {
           onUpdate={updateTodo}
           editingId={editingId}
           setEditingId={setEditingId}
-        />
+          />
+          </div>
       ))
       )
     }
 
-      {!isFormVisible && <button className="floating-button" onClick={() => { handleFormVisible(1); }}> + </button>}
+      {!isFormVisible && <button 
+      className="floating-button" onClick={() => { handleFormVisible(1); }}> + </button>}
     </div>
   )
 }

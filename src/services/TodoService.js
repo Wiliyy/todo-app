@@ -18,6 +18,18 @@ export class TodoService {
     this.todos = this.todos.filter(todo => todo.id !== id)
   }
 
+  // src/services/TodoService.js
+  deleteTag(tagToDelete, defaultTag = "Quick task") {
+        // Update all todos with this tag to default tag
+    //     this.todos.forEach(todo => {
+    //     if (todo.tag === tagToDelete) {
+    //         todo.updateTag(defaultTag)
+    //     }
+    // })
+            // Delete all todos with this tag
+        this.todos = this.todos.filter(todo => todo.tag !== tagToDelete)
+   }
+
   toggleTodo(id) {
     const todo = this.todos.find(t => t.id === id)
     if (todo) {

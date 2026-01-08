@@ -1,5 +1,5 @@
 // src/components/TodoList.jsx (New - Separated List Logic)
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import TodoItem from './TodoItem'
 
 function TodoList({ selectedTag, handleTaskCount, currentFilter, filteredTodos, filter, filters, setFilters, handleTypeChange , todos, onToggle, onDelete, onUpdate, editingId, setEditingId }) {
@@ -17,7 +17,7 @@ function TodoList({ selectedTag, handleTaskCount, currentFilter, filteredTodos, 
 
   // New render logic: render all tags if the selectedTag/todo.tag match fails
   const renderTodos = () => {
-    if (filter.selected && filter.id == currentFilter) {
+    if (filter.selected ) {
       // If a selectedTag is present, render only todos for that tag; else, render all
       return filteredTodos.map((todo) => {
         if (!selectedTag) {
@@ -33,21 +33,23 @@ function TodoList({ selectedTag, handleTaskCount, currentFilter, filteredTodos, 
               onSaveEdit={handleSaveEdit}
               onCancelEdit={handleCancelEdit}
               isEditing={editingId === todo.id}
-            />
-          );
+              handleTypeChange={handleTypeChange}
+              />
+            );
         } else if (todo.tag === selectedTag.id ) {
-          // selectedTag present and matches todo.tag
-          return (
-            <TodoItem
-              selectedTag={selectedTag}
-              key={todo.id}
-              todo={todo}
-              onToggle={onToggle}
-              onDelete={onDelete}
-              onEdit={handleEdit}
-              onSaveEdit={handleSaveEdit}
-              onCancelEdit={handleCancelEdit}
-              isEditing={editingId === todo.id}
+            // selectedTag present and matches todo.tag
+            return (
+                <TodoItem
+                selectedTag={selectedTag}
+                key={todo.id}
+                todo={todo}
+                onToggle={onToggle}
+                onDelete={onDelete}
+                onEdit={handleEdit}
+                onSaveEdit={handleSaveEdit}
+                onCancelEdit={handleCancelEdit}
+                isEditing={editingId === todo.id}
+                handleTypeChange={handleTypeChange}
             />
           );
         }
@@ -60,17 +62,7 @@ function TodoList({ selectedTag, handleTaskCount, currentFilter, filteredTodos, 
 
   return (
     <div className='todos-container'>
-      <button className='filter-buttons-title-button' onClick={() => handleTypeChange(filter.id)}>
-        {filter.label} TASKS{' '} 
-        <span className='filter-buttons-button-count'>
-        </span>
-                {handleTaskCount(filter)}
-        <span style={{ verticalAlign: 'middle' }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            {!filter.selected ? <polyline points="9 6 15 12 9 18" /> : <polyline points="6 9 12 15 18 9" />}
-          </svg>
-        </span>
-      </button>
+
       {renderTodos()}
     </div>
   )

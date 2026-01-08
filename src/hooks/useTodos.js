@@ -30,8 +30,28 @@ export function useTodos(initialTodos = []) {
     }, [service])
 
     const deleteTodo = useCallback((id) => {
+        if (!window.confirm('Are you sure you want to delete this task?')) {
+            return // User cancelled
+        }
+        
         service.deleteTodo(id)
         setTodos(prev => prev.filter(t => t.id !== id))
+    }, [service])
+
+    // src/hooks/useTodos.js
+    const deleteTag = useCallback((tagId, defaultTag = "Quick task") => {
+        service.deleteTag(tagId)
+        // Remove all todos with this tag from state
+        setTodos(prev => prev.filter(t => t.tag !== tagId))
+        // Update state to reflect tag changes
+        // setTodos(prev => prev.map(t => {
+        //     if (t.tag === tagId) {
+        //         const updated = Todo.fromPlainObject(t.toPlainObject())
+        //         updated.updateTag(defaultTag)
+        //         return updated
+        //     }
+        //     return t
+        // }))
     }, [service])
 
     const toggleTodo = useCallback((id) => {
@@ -65,6 +85,7 @@ export function useTodos(initialTodos = []) {
         deleteTodo,
         toggleTodo,
         updateTodo,
-        updateTag
+        updateTag,
+        deleteTag
     }
 }

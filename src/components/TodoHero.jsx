@@ -3,7 +3,7 @@ import React from 'react'
 function TodoHero({completedTodos, totalTodos}) {
   return (
     <div className="todo-form-hero">
-          <div >
+          <div className="todo-form-hero-text">
             <h1>
               {completedTodos != totalTodos ? 'you can do it' : 'you did it'}
               </h1>

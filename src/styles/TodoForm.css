@@ -23,6 +23,8 @@
 
 }
 
+
+
 /* .todo-form-hero * {
   user-select: text;
   -webkit-user-select: text;
@@ -120,8 +122,12 @@
 
 
   .todo-form-hero-progress{
-    width: 10cap;
-    height: 10cap;
+    width: 10vw;
+    height: 10vw;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 200px;
+    max-height: 200px;
     background-color: var(--button-color);
     border-radius: 50%;
     display: flex;
@@ -131,6 +137,7 @@
     font-size: 1.8cap;
     font-weight: 600;
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    margin: 0 auto;
   }
 
 
@@ -147,3 +154,22 @@
 
 
   
+@media (max-width: 400px) {
+    .todo-form-hero{
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    } 
+    .todo-form-hero-text {
+        text-align: center;
+    }
+    .todo-form-hero-text p {
+        text-align: center;
+    }
+    .todo-form-hero-progress {
+        margin: 0 auto;
+    }
+    .todo-form-hero p{
+        text-align: center;
+    }
+}

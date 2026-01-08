@@ -77,8 +77,8 @@
 
 .todo-item-checkbox-button-checked-icon {
     position: absolute;
-    top: .3cap;
-    left: .3cap;
+    top: .2inch;
+    left: .2inch;
     width: 2cap;
     height: 2cap;
     color: var(--text-color);
