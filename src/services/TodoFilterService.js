@@ -16,9 +16,6 @@ export class TodoFilterService {
  
     getCount(todos, filterType, selectedTag) {
         let count = 0
-        // if (selectedTag) {
-        //     count = todos.filter(todo => todo.tag === selectedTag.id).length
-        // }
             if (filterType === 'active' ) {
                 count += todos.filter(todo => (!todo.isCompleted) && (selectedTag ? todo.tag === selectedTag.id : true)).length
             } else if (filterType === 'completed') {

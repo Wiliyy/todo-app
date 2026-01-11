@@ -85,6 +85,47 @@ function TodoItem({ selectedTag, todo, onToggle, onDelete, onEdit, isEditing, on
                 {!selectedTag && <div className="todo-item-tag-container">
                     <p className="todo-item-tag">{todo.tag}</p>
                 </div>}
+
+                {/* {todo.frequency && <div className="todo-item-frequency-container">
+                    <p className="todo-item-frequency">{todo.frequency}</p>
+                </div>}
+
+                {todo.targetDays && <div className="todo-item-target-days-container">
+                    <p className="todo-item-target-days">{todo.targetDays}</p>
+                </div>}
+
+                {todo.customInterval && <div className="todo-item-custom-interval-container">
+                    <p className="todo-item-custom-interval">{todo.customInterval}</p>
+                </div>} */}
+
+               <div className="todo-item-streak-container"
+               style={{
+                display:'flex',
+                flexDirection:'row',
+                alignItems:'center',
+                justifyContent:'center',
+                gap: '1cap',
+                width: '10cap',
+                // gap: '1cap',
+                // backgroundColor: 'var(--button-color)',
+                // color: 'var(--text-color)',
+                // borderRadius: '9999px',
+                // fontSize: '11px',
+                // padding: '0 0.5cap',
+               }}
+               >
+                {todo.streak > 0 && <div className="todo-item-streak">
+                    <span className="habit-streak">  {todo.streak} 🔥 </span>
+                </div>
+                }
+                </div>
+
+
+                {todo.longestStreak && <div className="todo-item-longest-streak-container">
+                    <p className="todo-item-longest-streak">{todo.longestStreak}</p>
+                </div>}
+
+
                 <button className="todo-item-button" onClick={() => onDelete(todo.id)}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         strokeWidth="2">

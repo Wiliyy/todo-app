@@ -1,0 +1,31 @@
+.habit-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: var(--secondary-color);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+}
+
+.habit-item.completed {
+    opacity: 0.6;
+}
+
+.habit-checkbox {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--button-color);
+    background: transparent;
+    cursor: pointer;
+}
+
+.habit-checkbox.checked {
+    background: var(--button-color);
+    color: white;
+}
+
+.habit-streak {
+    font-size: 0.9rem;
+}

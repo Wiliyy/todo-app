@@ -107,7 +107,74 @@ function TagsButtons({ todos , selectedTag, tags, setTags, error, setError, isFo
             onSubmit={handleSubmit} 
             className='filter-buttons-container'
         >
-            <h1 className='filter-buttons-title'> CATEGORIES {selectedTag ? `(${selectedTag.label})` : ''}</h1>
+            <div
+            style={{
+                display:'flex',
+                flexDirection:'row',
+                alignItems:'center',
+                justifyContent:'space-between',
+                width:'100%',
+            }}
+            >
+                <div>   
+                        <h1 className='filter-buttons-title'> CATEGORIES {selectedTag ? `(${selectedTag.label})` : ''}</h1>
+                </div>
+
+                <div
+                className='filter-buttons-date-container'
+                style={{
+                    display:'flex',
+                    flexDirection:'column',
+                    alignItems:'center',
+                    justifyContent:'center',
+                }}
+
+                
+                >
+
+                    <div
+                    className='filter-buttons-date-container-upper'
+                    >
+                            <div className='filter-buttons-date-container-upper-left'>
+                                
+                            </div>
+                            <div className='filter-buttons-date-container-upper-right'>
+                                
+                            </div>
+                    </div>
+                    <p
+                    
+                    style={{
+                        fontSize:'3em',
+                        fontWeight:'bold',
+                        color:'var(--text-color)',
+                        margin:'0',
+                        marginTop:'25%',
+                        padding:'0',
+                        textAlign:'center',
+                        fontFamily:'Formula Condensed',
+                    }}
+                    >
+                        {new Date().getDate()}
+                    </p>
+                    <p
+                    
+                    style={{
+                        fontSize:'1.5em',
+                        // fontWeight:'bold',
+                        color:'var(--text-color)',
+                        margin:'0',
+                        padding:'0',
+                        textAlign:'center',
+                        fontFamily:'Formula Condensed',
+                    }}
+                    >
+                        {new Date().toLocaleString('default', { month: 'long' })}
+                    </p>
+                </div>
+            </div>
+
+
             <div className='filter-buttons'>
                 {tags.map((tag, index) => {
                     const isEditing = editingTagId === tag.id
@@ -210,6 +277,7 @@ function TagsButtons({ todos , selectedTag, tags, setTags, error, setError, isFo
                         onBlur={() => { setError('') }}
                     />
                 )}
+
             </div>
             {error && <p className='filter-buttons-error'>{error}</p>}
         </form>
