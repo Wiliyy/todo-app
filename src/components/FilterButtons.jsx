@@ -62,7 +62,7 @@ function FilterButtons({ filters, setFilters, error, setError, isFormVisible, in
                     </>
                 ))}
             </div>
-            {error && <p className='filter-buttons-error'>{error}</p>}
+            {<p className='filter-buttons-error'>{error}</p>}
         </form>
     )
 }

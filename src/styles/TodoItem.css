@@ -1,14 +1,17 @@
-.todo-item {
+.todo-item  {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     max-width: 100%;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     background-color: var(--secondary-color);
     border-radius: 10px;
-    padding: 10px;
+    /* padding: 10px; */
+    height: 7cap;
+    padding:1cap;
     /* z-index: 99; */
+    /* height: 10cap; */
 }
 
 .todo-item-container {
@@ -17,7 +20,16 @@
     align-items: center;
     justify-content: center;
     min-width: 100%;
-    gap: 1.5cap;
+    width: 100%;
+    height: 10cap;
+    min-height: 7cap;
+    max-height: 9cap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-items: center;
+    /* height: 100%; */
+    height: 10cap;
 }
 
 
@@ -34,6 +46,9 @@
     justify-content: center;
     color: var(--text-color);
     outline: none;
+    /* z-index: 9999; */
+    align-items: end;
+justify-content: end;
 }
 
 .todo-item-button:focus {
@@ -50,7 +65,6 @@
     align-items: center;
     justify-content: center;
     color: var(--text-color);
-    /* outline: none; */
 }
 
 /* .todo-item-checkbox-button:focus {
@@ -69,11 +83,25 @@
     color: var(--text-color);
     position: relative;
     /* outline: none; */
+    transition: all 0.9s ease;
 }
 
-.todo-item-checkbox-button-checked:focus {
-    /* outline: none; */
+.todo-item-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+    
+    /* Multi-line fix */
+    min-width: 0;              /* KEY: allows flex item to shrink */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;       /* allows wrapping */
 }
+
 
 .todo-item-checkbox-button-checked-icon {
     position: absolute;
@@ -83,17 +111,8 @@
     height: 2cap;
     color: var(--text-color);
     /* z-index: 10; */
-    z-index: 9999;
+    /* z-index: 9999; */
 }
-.todo-item-text {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    width: 100%;
-} 
 
 
 .todo-item-button{

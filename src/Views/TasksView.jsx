@@ -16,9 +16,15 @@ function TasksView({currentView, initialTodos , error, setError , handleAppClick
   
 
   useEffect(() => {
-    setCompletedTodos(todos.filter(todo => todo.isCompleted).length)
-    console.log("completedTodos", completedTodos)
-  }, [todos ])
+    setCompletedTodos(todos.filter(todo => {
+
+      
+     return todo.dayIndex.includes(new Date(viewYear, viewMonth, selectedDay).getDay())
+    }
+    ).length
+  
+  )
+  }, [todos , viewYear, viewMonth, selectedDay ])
 
   const [tags, setTags] = useState([
     { id: 'Quick', label: 'Quick', selected: true },

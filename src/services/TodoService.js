@@ -19,7 +19,7 @@ export class TodoService {
   }
 
   // src/services/TodoService.js
-  deleteTag(tagToDelete, defaultTag = "Quick task") {
+  deleteTag(tagToDelete) {
         // Update all todos with this tag to default tag
     //     this.todos.forEach(todo => {
     //     if (todo.tag === tagToDelete) {

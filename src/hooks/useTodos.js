@@ -16,7 +16,7 @@ export function useTodos(initialTodos = []) {
         const todoService = new TodoService()
 
         initialTodos.forEach(todo => {
-            todoService.addTodo(todo.text, todo.tag || "Quick")
+            todoService.addTodo(todo.text, todo.tag)
         })
 
         return todoService
@@ -33,13 +33,13 @@ export function useTodos(initialTodos = []) {
         if (!window.confirm('Are you sure you want to delete this task?')) {
             return // User cancelled
         }
-        
+
         service.deleteTodo(id)
         setTodos(prev => prev.filter(t => t.id !== id))
     }, [service])
 
     // src/hooks/useTodos.js
-    const deleteTag = useCallback((tagId, defaultTag = "Quick task") => {
+    const deleteTag = useCallback((tagId) => {
         service.deleteTag(tagId)
         // Remove all todos with this tag from state
         setTodos(prev => prev.filter(t => t.tag !== tagId))
