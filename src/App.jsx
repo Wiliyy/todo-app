@@ -12,14 +12,17 @@ import { useHabits } from './hooks/useHabits'
 import HabitList from './components/HabitList'
 import TasksView from './Views/TasksView'
 import HabitsView from './Views/HabitsView'
+import Header from './components/Header'
 
 
 function App() {
+  const [theme, setTheme] = useState('light')
+
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
   const [editingId, setEditingId] = useState(null)
   const [isFormVisible, setIsFormVisible] = useState(false)
-
+  const [isFormEditingVisible, setIsFormEditingVisible] = useState(false)
   const [initialTodos, setInitialTodos] = useState([])
 
 
@@ -33,6 +36,15 @@ function App() {
     { id: 'completed', label: 'Completed', selected: false }
   ])
 
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light')
+  }
   const handleFormVisible = (visible) => {
     if (visible === 1) {
       setIsFormVisible(true)
@@ -55,52 +67,13 @@ function App() {
   
   return (
     <div onClick={handleAppClick} className='app'>
-{/* <button
-  style={{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '10px',
-    marginLeft: '10px',
-    marginRight: '10px',
-    marginTop: '10px',
-    marginBottom: '10px',
-    padding: '10px',
-    borderRadius: '10px',
-    border: '1px solid #000',
-    backgroundColor: '#fff',
-    zIndex: 9999,
-  }}
-  onClick={() => setCurrentView('tasks')}
-  className={currentView === 'tasks' ? 'active' : ''}
-  >
-  Tasks
-</button>
-<button
-  style={{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '10px',
-    marginLeft: '10px',
-    marginRight: '10px',
-    marginTop: '10px',
-    marginBottom: '10px',
-    padding: '10px',
-    borderRadius: '10px',
-    border: '1px solid #000',
-    backgroundColor: '#fff',
-    zIndex: 9999,
-  }}
-  onClick={() => {setCurrentView('habits') , console.log("currentView", currentView)}}
-  className={currentView === 'habits' ? 'active' : ''}
-  >
-  Habits
-</button> */}
     {/* <TasksView currentView={currentView} initialTodos={[]}  error={error} setError={setError} handleAppClick={handleAppClick} isFormVisible={isFormVisible} setIsFormVisible={setIsFormVisible} input={input} setInput={setInput} filters={filters} setFilters={setFilters} editingId={editingId} setEditingId={setEditingId} /> */}
-    <HabitsView initialTodos={initialTodos || []}  error={error} setError={setError} handleAppClick={handleAppClick} isFormVisible={isFormVisible} setIsFormVisible={setIsFormVisible} input={input} setInput={setInput} filters={filters} setFilters={setFilters} editingId={editingId} setEditingId={setEditingId} />
+    <HabitsView 
+    isFormEditingVisible={isFormEditingVisible}
+    setIsFormEditingVisible={setIsFormEditingVisible}
+    theme={theme}
+    toggleTheme={toggleTheme}
+    initialTodos={initialTodos || []}  error={error} setError={setError} handleAppClick={handleAppClick} isFormVisible={isFormVisible} setIsFormVisible={setIsFormVisible} input={input} setInput={setInput} filters={filters} setFilters={setFilters} editingId={editingId} setEditingId={setEditingId} />
       {/* <TodoHero completedTodos={completedHabits} totalTodos={habits.length} />
       <FilterButtons handleTaskCount={handleTaskCount} filters={filters} setFilters={setFilters} error={error} setError={setError} updateTag={updateTag} isFormVisible={isFormVisible} input={input} setInput={setInput} getCount={getCount} completedTodos={completedTodos} todos={todos} currentFilter={currentFilter} onFilterChange={changeFilter} />
       <TagsButtons todos={habits} onDeleteTag={deleteTag} onUpdateTag={updateTag} selectedTag={selectedTag} handleTaskCount={handleTaskCount} tags={tags} setTags={setTags} error={error} setError={setError} updateTag={updateTag} isFormVisible={isFormVisible} input={input} setInput={setInput} getCount={getHabitCount} completedTodos={completedHabits} currentFilter={currentFilter} onTagChange={handleTagChange} />
@@ -164,7 +137,14 @@ function App() {
     } */}
 
       {!isFormVisible && <button 
-      className="floating-button" onClick={() => { handleFormVisible(1); }}> + </button>}
+      className="floating-button" onClick={() => { handleFormVisible(1); }}>
+        
+         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+           <line x1="11" y1="5" x2="11" y2="17" />
+           <line x1="5" y1="11" x2="17" y2="11" />
+         </svg>
+         
+         </button>}
     </div>
   )
 }

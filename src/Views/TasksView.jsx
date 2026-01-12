@@ -17,7 +17,6 @@ function TasksView({currentView, initialTodos , error, setError , handleAppClick
 
   useEffect(() => {
     setCompletedTodos(todos.filter(todo => todo.isCompleted).length)
-    console.log("completedTodos", completedTodos)
   }, [todos ])
 
   const [tags, setTags] = useState([

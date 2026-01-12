@@ -1,28 +1,64 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { HabitService } from '../services/HabitService'
 import { Habit } from '../models/Habit'
 
+
+const STORAGE_KEY = 'habits-storage'
 export function useHabits(initialHabits = []) {
 
-    const [habits, setHabits] = useState(() =>
-        initialHabits.map(h => Habit.fromPlainObject(h))
-    )
+    // const [habits, setHabits] = useState(() =>
+    //     initialHabits.map(h => Habit.fromPlainObject(h))
+    // )
 
 
+    // const [service] = useState(() => {
+    //     const habitService = new HabitService()
+    //     initialHabits.forEach(habit => {
+    //         habitService.addHabit(habit.text, habit.frequency || "Daily", habit.tag || "Quick")
+    //     })
+    //     return habitService
+    // })
+
+     // Load from localStorage OR use initialHabits
+     const [habits, setHabits] = useState(() => {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved)
+                return parsed.map(h => Habit.fromPlainObject(h))
+            } catch (e) {
+                console.error('Failed to parse habits from localStorage', e)
+            }
+        }
+        return initialHabits.map(h => Habit.fromPlainObject(h))
+    })
+
+    // Initialize service with habits (sync IDs!)
     const [service] = useState(() => {
         const habitService = new HabitService()
-        // habitService.habits = initialHabits.map(h => Habit.fromPlainObject(h))
-        initialHabits.forEach(habit => {
-            habitService.addHabit(habit.text, habit.frequency || "Daily", habit.tag || "Quick")
-        })
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved)
+                habitService.habits = parsed.map(h => Habit.fromPlainObject(h))
+            } catch (e) {
+                console.error('Failed to load habits to service', e)
+            }
+        } else {
+            habitService.habits = initialHabits.map(h => Habit.fromPlainObject(h))
+        }
         return habitService
     })
 
-    
+    // Save to localStorage whenever habits change
+    useEffect(() => {
+        const plainHabits = habits.map(h => h.toPlainObject())
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(plainHabits))
+    }, [habits])
 
 
-    const addHabit = useCallback((text, frequency, tag)=>{
-        const newHabit = service.addHabit(text, frequency, tag)
+    const addHabit = useCallback((text, frequency, tag, targetDate)=>{
+        const newHabit = service.addHabit(text, frequency, tag, targetDate)
         setHabits(prev => [...prev, newHabit])
     }, [service])
 
@@ -49,9 +85,11 @@ export function useHabits(initialHabits = []) {
         return habit.isCompleteToday()
     }, [service])
 
-    const updateHabit = useCallback((id, newText) => {
-        service.updateHabit(id, newText)
-        setHabits(prev => prev.map(h => h.id === id ? Habit.fromPlainObject(h.toPlainObject()) : h))
+    const updateHabit = useCallback((id, newText, updateTargetDays, updateFrequency) => {
+        console.log('updateHabit in hook', id, newText, updateTargetDays, updateFrequency)
+        const updatedHabit = service.updateHabit(id, newText, updateTargetDays, updateFrequency)
+        if (!updatedHabit) return
+        setHabits(prev => prev.map(h => h.id === id ? updatedHabit : h))
     }, [service])
     return {
         habits: habits.map(h => h.toPlainObject()),

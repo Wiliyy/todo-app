@@ -5,11 +5,22 @@ export class HabitService {
         this.habits = [];
     }
 
-    addHabit(text, frequency , tag) {
+    addHabit(text, frequency , tag ,targetDate) {
         const id = this.generateId();
-        const habit = new Habit(id, text, frequency ,tag, [], 0, 
-                
-            new Date()
+        
+        const habit = new Habit(
+            id,
+            text,
+            frequency ,
+            tag,
+            [],
+            0,    
+            new Date(),
+            false,
+                targetDate
+            ,
+            1,
+            0
         );
         this.habits.push(habit);
         return habit;
@@ -28,8 +39,7 @@ export class HabitService {
         if (habit.isCompleteToday()) {
             // Already completed today → remove today from completions (un-complete)
             habit.completions = habit.completions.filter(date => date !== today);
-            console.log("in if ")
-            console.log(habit)
+            
             habit.streak = Math.max(0, habit.streak - 1); // Decrease streak
             // habit.toggle(today);
             habit.unmarkComplete(today);
@@ -51,10 +61,13 @@ export class HabitService {
         return null
       }
     
-    updateHabit(id, newText) {
+    updateHabit(id, newText, updateTargetDays, updateFrequency) {
+        console.log('updateHabit in service', id, newText, updateTargetDays, updateFrequency)
         const habit = this.habits.find(h => h.id === id)
         if (habit) {
             habit.updateText(newText)
+            habit.updateTargetDays(updateTargetDays)
+            habit.updateFrequency(updateFrequency)
             return habit
         }
         return null

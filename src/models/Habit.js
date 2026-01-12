@@ -6,7 +6,7 @@ export class Habit {
         this.tag = tag
         this.completions = completions;
         this.streak = streak;
-        this.createdAt = createdAt;
+        this.createdAt = createdAt ;
         this.isCompleted = false;
         this.targetDays = targetDays;
         this.customInterval = customInterval;
@@ -17,6 +17,14 @@ export class Habit {
         this.text = text
     }
 
+    updateTargetDays(targetDays) {
+        this.targetDays = targetDays
+    }
+
+    updateFrequency(frequency) {
+        this.frequency = frequency
+    }
+
     updateTag(tag) {
         this.tag = tag
     }
@@ -24,7 +32,10 @@ export class Habit {
     markComplete(date) {
         this.isCompleted = !this.isCompleted;
         this.completions.push(date);
-        this.streak++;
+        // this.streak++;
+        // console.log("in markComplete")
+        // console.log(this)
+        this.calculateStreak();  // ADD this.
 
     }
 
@@ -37,10 +48,6 @@ export class Habit {
     isCompleteToday() {
         const today = new Date().toISOString().split('T')[0];
         return this.completions.includes(today);  // Simpler and correct
-    }
-
-    calculateStreak() {
-        return this.completions.filter(completion => completion.toISOString().split('T')[0] === new Date().toISOString().split('T')[0]).length;
     }
 
     resetStreak() {
@@ -76,6 +83,7 @@ export class Habit {
     }
 
     calculateStreak() {
+        // console.log("in calculateStreak")
         if (this.completions.length === 0) return 0;
 
         const sorted = [...this.completions].sort().reverse();
@@ -93,6 +101,7 @@ export class Habit {
             }
             checkDate.setDate(checkDate.getDate() - 1);
         }
+        this.streak = streak;
         return streak;
     }
 
@@ -119,6 +128,9 @@ export class Habit {
             plainObject.streak,
             plainObject.createdAt,
             plainObject.isCompleted,
+            plainObject.targetDays,
+            plainObject.customInterval,
+            plainObject.longestStreak
         );
     }
 
@@ -132,6 +144,9 @@ export class Habit {
             streak: this.streak,
             createdAt: this.createdAt,
             isCompleted: this.isCompleted,
+            targetDays: this.targetDays,
+            customInterval: this.customInterval,
+            longestStreak: this.longestStreak
         };
     }
 }

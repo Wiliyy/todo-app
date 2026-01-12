@@ -1,23 +1,56 @@
 :root {
-  --primary-color: #190035;
-  /* --secondary-color: #1c1d1c93; */
-  --secondary-color: rgba(4, 2, 50, 0.9);
-  --text-color: #ffffff;
-  --text-color-secondary: #949a9493;
-  --text-color-secondary-hover: #353735;
-  --button-color: #bab8b8;
-  --button-color-checked: #959595;
-  --button-color-hover: #8a8a8a;
+  --primary-color: #f5f5f5;              /* whitesmoke background */
+  --secondary-color: #ffffff;             /* white cards/containers */
+  --text-color: #0f172a;                  /* dark black text */
+  --text-color-secondary: #6b6b6b;        /* gray secondary text */
+  --text-color-secondary-hover: #e0e0e0;  /* light gray borders */
+  --button-color: #0f172a;                /* dark buttons */
+  --button-color-checked: #1c2b4e;        /* black when checked */
+  --button-color-hover: #263b6b;          /* dark gray hover */
   --global-gap: 4cap;
   --global-border-radius: 1cap;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   text-transform: capitalize;
-  color: rgba(255, 255, 255, 0.87);
+  color: #1a1a1a;                         /* default dark text */
   background-color: var(--primary-color);  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+:light{
+    --primary-color: #0f172a;              /* dark background (was text-color) */
+    --secondary-color: #0a1327;            /* dark cards (was button-color-checked) */
+    --text-color: #f5f5f5;                 /* light text (was primary-color) */
+    --text-color-secondary: #9ca3af;       /* lighter gray for dark mode */
+    --text-color-secondary-hover: #374151; /* darker borders for dark mode */
+    --button-color: #f5f5f5;               /* light buttons */
+    --button-color-checked: #e0e0e0;       /* light when checked */
+    --button-color-hover: #d1d5db;         /* light gray hover */
+    --global-gap: 4cap;
+    --global-border-radius: 1cap;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    text-transform: capitalize;
+    color: #f5f5f5;                        /* default light text */
+    background-color: var(--primary-color);  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark theme - applied via data attribute */
+[data-theme="dark"] {
+  --primary-color: #0f172a;
+  --secondary-color: #0a1327;
+  --text-color: #f5f5f5;
+  --text-color-secondary: #9ca3af;
+  --text-color-secondary-hover: #374151;
+  --button-color: #f5f5f5;
+  --button-color-checked: #e0e0e0;
+  --button-color-hover: #d1d5db;
 }
 
 /* Prevent text selection on UI elements */

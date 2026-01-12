@@ -7,20 +7,29 @@ import TagsButtons from '../components/TagsButtons'
 import TodoHero from '../components/TodoHero'
 import { useHabits } from '../hooks/useHabits'
 import HabitList from '../components/HabitList'
+import Calendar from '../components/Calendar'
+import CalenderCard from '../components/CalenderCard'
+import Header from '../components/Header'
 
 
-function HabitsView({ initialTodos, error, setError, handleAppClick, isFormVisible, setIsFormVisible, input, setInput, filters, setFilters, editingId, setEditingId }) {
+function HabitsView({ theme, toggleTheme, initialTodos, error, setError, handleAppClick, isFormVisible, setIsFormVisible, input, setInput, filters, setFilters, editingId, setEditingId, isFormEditingVisible, setIsFormEditingVisible }) {
     const [completedTodos, setCompletedTodos] = useState(0)
 
     const { habits: todos, addHabit: addTodo, deleteHabit: deleteTodo, toggleHabit: toggleTodo, updateHabit: updateTodo, updateTag: updateTag, deleteTag: deleteTag } = useHabits(initialTodos)
     const { filteredTodos, currentFilter, changeFilter, getCount } = useTodoFilter(todos, error, setError)
 
+    const [isCalendarVisible, setIsCalendarVisible] = useState(false)
+
+    const [viewMonth, setViewMonth] = useState(new Date().getMonth())    // 0-11
+    const [viewYear, setViewYear] = useState(new Date().getFullYear())   // 2026
+    const [selectedDay, setSelectedDay] = useState(new Date().getDate()) // 1-31
+    const [selectedType, setSelectedType] = useState('Daily')
 
 
 
     useEffect(() => {
         setCompletedTodos(todos.filter(todo => todo.isCompleted).length)
-        console.log("completedTodos", completedTodos)
+        // console.log(todos)
     }, [todos])
 
     const [tags, setTags] = useState([
@@ -47,11 +56,12 @@ function HabitsView({ initialTodos, error, setError, handleAppClick, isFormVisib
 
 
     const handleSubmit = (e) => {
+        let targetDate = new Date(viewYear, viewMonth, selectedDay)
         e.preventDefault()
         if (input.trim() === '') {
             return
         }
-        addTodo(input, "Daily", selectedTag ? selectedTag.id : 'Quick')
+        addTodo(input, selectedType, selectedTag ? selectedTag.id : 'All', targetDate)
         setInput('')
         setIsFormVisible(false)
     }
@@ -63,25 +73,106 @@ function HabitsView({ initialTodos, error, setError, handleAppClick, isFormVisib
         return getCount(todos, filter, selectedTag)
     }
 
-    console.log("todos", todos)
+    useEffect(() => {
+        console.log(viewYear, viewMonth, selectedDay)
+        console.log(new Date(viewYear, viewMonth, selectedDay))
+
+        
+        // console.log(todos[0].targetDays)
+    }, [todos])
     return (
         <div
             onClick={handleAppClick} className='app'>
-            <TodoHero completedTodos={completedTodos} totalTodos={todos.length} />
-            <TagsButtons todos={todos} onDeleteTag={deleteTag} onUpdateTag={updateTag} selectedTag={selectedTag} handleTaskCount={handleTaskCount} tags={tags} setTags={setTags} error={error} setError={setError} updateTag={updateTag} isFormVisible={isFormVisible} input={input} setInput={setInput} getCount={getCount} completedTodos={completedTodos} currentFilter={currentFilter} onTagChange={handleTagChange} />
-            <TodoForm error={error} setError={setError} handleAppClick={handleAppClick} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit} />
-            {
+            <Header 
+            viewMonth={viewMonth}
+            viewYear={viewYear}
+            selectedDay={selectedDay}
+            setViewMonth={setViewMonth}
+            setViewYear={setViewYear}
+            setSelectedDay={setSelectedDay}
+                theme={theme}
+                toggleTheme={toggleTheme}
+                isCalendarVisible={isCalendarVisible}
+                setIsCalendarVisible={setIsCalendarVisible}
+            />
+            {/* <TodoHero completedTodos={completedTodos} totalTodos={todos.length} /> */}
+<div
+
+style={{
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    // gap: '10px',
+}}
+>
+    {   !isCalendarVisible &&      <CalenderCard 
+        onClick={() => setIsCalendarVisible(!isCalendarVisible)}
+        viewMonth={viewMonth}
+        viewYear={viewYear}
+        selectedDay={selectedDay}
+        setViewMonth={setViewMonth}
+        setViewYear={setViewYear}
+        setSelectedDay={setSelectedDay}
+        cardWidth="100%"
+                cardHeight="50cap" 
+                dayFontSize="15cap"
+                monthFontSize="5cap" 
+                upperHieght="20%" 
+                LeftWidth="2cap" 
+                RightWidth="2cap" 
+        />}
+        </div>
+            {!isFormEditingVisible && <TagsButtons
+            isCalendarVisible={isCalendarVisible}
+            setIsCalendarVisible={setIsCalendarVisible}
+            filteredTodos={filteredTodos}
+            viewMonth={viewMonth}
+            setViewMonth={setViewMonth}
+            viewYear={viewYear}
+            setViewYear={setViewYear}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+            todos={todos} 
+            onDeleteTag={deleteTag}
+            onUpdateTag={updateTag}
+            selectedTag={selectedTag}
+            handleTaskCount={handleTaskCount}
+            tags={tags} setTags={setTags}
+            error={error} setError={setError}
+            updateTag={updateTag}
+            isFormVisible={isFormVisible}
+            input={input} setInput={setInput}
+            getCount={getCount}
+            completedTodos={completedTodos}
+            currentFilter={currentFilter}
+            onTagChange={handleTagChange} />}
+            
+            {!isFormEditingVisible && <TodoForm
+            filteredTodos={filteredTodos}
+            viewMonth={viewMonth}
+            setViewMonth={setViewMonth}
+            viewYear={viewYear}
+            setViewYear={setViewYear}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+            isCalendarVisible={isCalendarVisible}
+            setIsCalendarVisible={setIsCalendarVisible} 
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+            error={error} setError={setError} handleAppClick={handleAppClick} isFormVisible={isFormVisible} input={input} setInput={setInput} handleSubmit={handleSubmit} />}
+            {/* {
                 filters.map((filter, index) => (
-                    (
+                    ( */}
                         <div
                             style={{
                                 display: "flex",
                                 flexDirection: "column",
                                 gap: "2cap"
                             }}
-                            key={index}
+                            // key={index}
                         >
-                            <button className='filter-buttons-title-button' onClick={() => handleTypeChange(filter.id)}>
+                            {/* <button className='filter-buttons-title-button' onClick={() => handleTypeChange(filter.id)}>
                                 {filter.label} {' '}
 
                                 {getCount(todos, filter.id, selectedTag)}
@@ -90,31 +181,49 @@ function HabitsView({ initialTodos, error, setError, handleAppClick, isFormVisib
                                         {!filter.selected ? <polyline points="9 6 15 12 9 18" /> : <polyline points="6 9 12 15 18 9" />}
                                     </svg>
                                 </span>
-                            </button>
-                            <HabitList
-                                selectedTag={selectedTag}
-                                key={index}
-                                handleTaskCount={handleTaskCount}
-                                currentFilter={currentFilter}
-                                filteredTodos={filteredTodos}
-                                filter={filter}
-                                filters={filters}
-                                setFilters={setFilters}
-                                handleTypeChange={handleTypeChange}
-                                todos={todos}
-                                onToggle={toggleTodo}
-                                onDelete={deleteTodo}
-                                onUpdate={updateTodo}
-                                editingId={editingId}
-                                setEditingId={setEditingId}
-                            />
+                            </button> */}
+                            {
+                                
+                                    <HabitList
+                                        selectedType={selectedType}
+                                        setSelectedType={setSelectedType}
+                                        isCalendarVisible={isCalendarVisible}
+                                        setSelectedDay={setSelectedDay}
+                                        setViewMonth={setViewMonth}
+                                        setViewYear={setViewYear}
+                                        setIsCalendarVisible={setIsCalendarVisible}
+                                        selectedTag={selectedTag}
+                                        // key={index}
+                                        handleTaskCount={handleTaskCount}
+                                        currentFilter={currentFilter}
+                                        filteredTodos={filteredTodos}
+                                        // filter={filter}
+                                        filters={filters}
+                                        setFilters={setFilters}
+                                        handleTypeChange={handleTypeChange}
+                                        todos={todos}
+                                        onToggle={toggleTodo}
+                                        onDelete={deleteTodo}
+                                        onUpdate={updateTodo}
+                                        editingId={editingId}
+                                        setEditingId={setEditingId}
+                                        viewMonth={viewMonth}
+                                        viewYear={viewYear}
+                                        selectedDay={selectedDay}
+                                        isFormEditingVisible={isFormEditingVisible}
+                                        setIsFormEditingVisible={setIsFormEditingVisible}
+                                    />
+                            }
+                            
                         </div>
-                    ))
-                )
-            }
+            
 
             {!isFormVisible && <button
-                className="floating-button" onClick={() => { handleFormVisible(1); }}> + </button>}
+                className="floating-button" onClick={() => {
+                    setIsCalendarVisible(false)
+                    //  handleFormVisible(1);
+                    // setIsFormEditingVisible(false)
+                     }}> + </button>}
         </div>
     )
 }

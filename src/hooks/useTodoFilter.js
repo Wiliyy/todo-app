@@ -11,7 +11,6 @@ export function useTodoFilter(todos, error, setError) {
     }, [todos, currentFilter, filterService])
 
     const changeFilter = useCallback((filter) => {
-        console.log("changeFilter", filter)
         setError("")
         setCurrentFilter(filter)
     }, [])
